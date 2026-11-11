@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio - Lab 1 Task 2</title>
+</head>
+<body>
+    <!-- HEADER: Contains logo/site name and navigation -->
+    <header>
+        <h1>Hafsa Nayyab</h1>
+        <h2>BS Software Engineering - GIKI</h2>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- MAIN CONTENT AREA -->
+    <main>
+
+        <!-- SECTION: About Me -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am a <b>passionate</b> and <i>dedicated</i> software engineering student 
+                at <u>Ghulam Ishaq Khan Institute of Engineering and Technology</u>. 
+                I specialize in <mark>web development</mark> and love creating 
+                <b>interactive</b> web applications. My journey in programming started 
+                with <i>Python</i> and now I work with <b>full-stack technologies</b>.
+            </p>
+            <br>
+            <img src="https://via.placeholder.com/200x150" alt="Profile Picture" width="200" height="150">
+            <br><br>
+            <a href="https://www.giki.edu.pk" target="_blank">Visit GIKI Website</a>
+        </section>
+
+        <hr>
+
+        <!-- ARTICLE: Blog-style content about interests -->
+        <article id="education">
+            <h2>Education & Achievements</h2>
+            <p>
+                Currently pursuing <b>BS Software Engineering</b> at GIKI. 
+                I have maintained a <mark>CGPA of 3.8+</mark> throughout my academic career.
+            </p>
+
+            <!-- Ordered List: Favorite Subjects -->
+            <h3>Favorite Subjects</h3>
+            <ol>
+                <li>Web Engineering</li>
+                <li>Database Systems</li>
+                <li>Software Design & Architecture</li>
+                <li>Data Structures & Algorithms</li>
+                <li>Computer Networks</li>
+            </ol>
+
+            <!-- Unordered List: Hobbies -->
+            <h3>Hobbies</h3>
+            <ul>
+                <li>Coding & Problem Solving</li>
+                <li>Reading Tech Blogs</li>
+                <li>Photography</li>
+                <li>Traveling</li>
+                <li>Gardening</li>
+            </ul>
+        </article>
+
+        <hr>
+
+        <!-- SECTION: Semester Results Table -->
+        <section id="education-table">
+            <h2>Semester Results</h2>
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Semester</th>
+                        <th>Subject</th>
+                        <th>Grade</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">1st</td>
+                        <td>Programming Fundamentals</td>
+                        <td>A</td>
+                        <td rowspan="3">3.85</td>
+                    </tr>
+                    <tr>
+                        <td>Calculus</td>
+                        <td>A-</td>
+                    </tr>
+                    <tr>
+                        <td>Physics</td>
+                        <td>B+</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">2nd</td>
+                        <td>Object Oriented Programming</td>
+                        <td>A</td>
+                        <td rowspan="3">3.90</td>
+                    </tr>
+                    <tr>
+                        <td>Discrete Mathematics</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Digital Logic Design</td>
+                        <td>A-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <!-- SECTION: Feedback Form -->
+        <section id="contact">
+            <h2>Feedback Form</h2>
+            <form action="#" method="POST">
+                <!-- Text input -->
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required><br><br>
+
+                <!-- Email input -->
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+                <!-- Password input -->
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" placeholder="Enter password" required><br><br>
+
+                <!-- Radio buttons for Gender -->
+                <label>Gender:</label><br>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br><br>
+
+                <!-- Checkboxes for Skills -->
+                <label>Skills:</label><br>
+                <input type="checkbox" id="html" name="skills" value="html">
+                <label for="html">HTML/CSS</label><br>
+                <input type="checkbox" id="js" name="skills" value="js">
+                <label for="js">JavaScript</label><br>
+                <input type="checkbox" id="python" name="skills" value="python">
+                <label for="python">Python</label><br>
+                <input type="checkbox" id="django" name="skills" value="django">
+                <label for="django">Django</label><br><br>
+
+                <!-- Dropdown for City -->
+                <label for="city">City:</label><br>
+                <select id="city" name="city">
+                    <option value="">Select City</option>
+                    <option value="islamabad">Islamabad</option>
+                    <option value="lahore">Lahore</option>
+                    <option value="karachi">Karachi</option>
+                    <option value="peshawar">Peshawar</option>
+                    <option value="mardan">Mardan</option>
+                </select><br><br>
+
+                <!-- Textarea for Message -->
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="5" cols="40" placeholder="Enter your message here..."></textarea><br><br>
+
+                <!-- Submit and Reset buttons -->
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- ASIDE: Additional info sidebar style -->
+        <aside>
+            <h3>Quick Facts</h3>
+            <ul>
+                <li><b>University:</b> GIKI</li>
+                <li><b>Department:</b> FCSE</li>
+                <li><b>Year:</b> 3rd Year</li>
+                <li><b>Location:</b> Topi, KPK</li>
+            </ul>
+        </aside>
+
+    </main>
+
+    <hr>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Hafsa Nayyab. All rights reserved.</p>
+        <p>SE-351L Web Engineering Lab | Faculty of Computer Science and Engineering</p>
+        <address>
+            Contact: <a href="mailto:hafsa@giki.edu.pk">hafsa@giki.edu.pk</a>
+        </address>
+    </footer>
+
+</body>
+</html>

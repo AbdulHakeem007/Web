@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio - Lab 2</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .form-group { margin-bottom: 15px; }
+        .styled-div { background-color: lightblue; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .highlight-div { background-color: lightyellow; padding: 20px; margin: 20px 0; border: 2px solid orange; border-radius: 8px; }
+        menu { background: #333; color: white; padding: 10px; }
+        menu li { display: inline; margin-right: 20px; cursor: pointer; }
+        menu li:hover { color: #4CAF50; }
+        img { border-radius: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER with semantic element -->
+        <header>
+            <h1>Hafsa Nayyab</h1>
+            <h2>Student Portfolio - Lab 2 Advanced HTML5</h2>
+        </header>
+
+        <!-- Image -->
+        <section>
+            <img src="https://via.placeholder.com/400x200/4CAF50/ffffff?text=GIKI+Campus" alt="GIKI Campus" width="400">
+        </section>
+
+        <!-- Anchor Link to external site -->
+        <section>
+            <h3>External Links</h3>
+            <p>
+                <a href="https://www.giki.edu.pk" target="_blank">Visit GIKI Official Website (Opens in new tab)</a>
+            </p>
+            <p>
+                <a href="https://www.google.com" target="_blank">Go to Google</a> | 
+                <a href="https://github.com" target="_blank">Visit GitHub</a>
+            </p>
+        </section>
+
+        <!-- Table with student data -->
+        <section>
+            <h3>Semester Results Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                        <th>CGPA</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Alice Johnson</td>
+                        <td>20</td>
+                        <td>Paris</td>
+                        <td>3.85</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Bob Smith</td>
+                        <td>22</td>
+                        <td>London</td>
+                        <td>3.72</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Charlie Brown</td>
+                        <td>21</td>
+                        <td>New York</td>
+                        <td>3.90</td>
+                        <td>Honors</td>
+                    </tr>
+                    <tr>
+                        <td>Diana Prince</td>
+                        <td>23</td>
+                        <td>Tokyo</td>
+                        <td>3.95</td>
+                        <td>Honors</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Form with all input types -->
+        <section>
+            <h3>Registration Form</h3>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="username">Name:</label><br>
+                    <input type="text" id="username" name="username" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Enter secure password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label><br>
+                    <input type="date" id="dob" name="dob">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone:</label><br>
+                    <input type="tel" id="phone" name="phone" placeholder="+92-XXX-XXXXXXX">
+                </div>
+
+                <!-- Dropdown / Select -->
+                <div class="form-group">
+                    <label for="fruits">Favorite Fruit:</label><br>
+                    <select id="fruits" name="fruits">
+                        <option value="">Select a fruit</option>
+                        <option value="apple">Apple</option>
+                        <option value="banana">Banana</option>
+                        <option value="cherry">Cherry</option>
+                        <option value="mango">Mango</option>
+                        <option value="orange">Orange</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City:</label><br>
+                    <select id="city" name="city">
+                        <option value="">Select City</option>
+                        <option value="islamabad">Islamabad</option>
+                        <option value="lahore">Lahore</option>
+                        <option value="karachi">Karachi</option>
+                        <option value="peshawar">Peshawar</option>
+                    </select>
+                </div>
+
+                <!-- Radio buttons -->
+                <div class="form-group">
+                    <label>Gender:</label><br>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label><br>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="form-group">
+                    <label>Skills:</label><br>
+                    <input type="checkbox" id="html" name="skills" value="html">
+                    <label for="html">HTML</label><br>
+                    <input type="checkbox" id="css" name="skills" value="css">
+                    <label for="css">CSS</label><br>
+                    <input type="checkbox" id="js" name="skills" value="js">
+                    <label for="js">JavaScript</label><br>
+                    <input type="checkbox" id="python" name="skills" value="python">
+                    <label for="python">Python</label>
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label for="message">About Yourself:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="50" placeholder="Tell us about yourself..."></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+                <button type="button" onclick="alert('Hello! You clicked the action button!')">Click Me</button>
+            </form>
+        </section>
+
+        <!-- Menu element -->
+        <section>
+            <h3>Menu Element</h3>
+            <menu>
+                <li>File</li>
+                <li>Edit</li>
+                <li>View</li>
+                <li>Help</li>
+            </menu>
+        </section>
+
+        <!-- Div containers with different styles -->
+        <section>
+            <h3>Div Containers</h3>
+            <div class="styled-div">
+                <p><b>Styled Div 1:</b> This div has a light blue background with padding. It demonstrates how divs can be used to group and style content.</p>
+            </div>
+
+            <div class="highlight-div">
+                <p><b>Styled Div 2:</b> This div has a light yellow background with an orange border. Divs are essential for CSS layout and organization.</p>
+            </div>
+
+            <div style="background-color: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><b>Inline Styled Div:</b> This div uses inline CSS styling to show that styles can be applied directly to elements.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 30px; padding: 20px; background: #333; color: white; border-radius: 8px;">
+            <p>&copy; 2026 Hafsa Nayyab | SE-351L Web Engineering Lab</p>
+            <p>Faculty of Computer Science and Engineering, GIKI</p>
+        </footer>
+
+    </div>
+</body>
+</html>

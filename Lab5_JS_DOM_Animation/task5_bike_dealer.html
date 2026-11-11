@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 Task 5 - Bike Dealer Form</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; max-width: 700px; margin: 0 auto; padding: 20px; background: #90EE90; }
+        .container { background: #90EE90; padding: 30px; border-radius: 10px; }
+        h1 { text-align: center; color: #333; font-size: 3rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); background: linear-gradient(to bottom, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .subtitle { color: #0000CD; font-weight: bold; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: inline-block; min-width: 150px; font-weight: bold; color: #333; }
+        input[type="text"], input[type="email"], textarea, select { padding: 8px; border: 1px solid #999; border-radius: 4px; width: 300px; }
+        textarea { vertical-align: top; }
+        .radio-group { display: inline-block; }
+        .radio-group label { min-width: auto; margin-right: 15px; font-weight: normal; }
+        .btn-group { margin-top: 25px; }
+        button { padding: 10px 20px; margin-right: 10px; cursor: pointer; font-weight: bold; border: 2px outset #ccc; background: #ddd; }
+        button:hover { background: #ccc; }
+        .validate-msg { color: #0000CD; font-weight: bold; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WELCOME</h1>
+        <p class="subtitle">Please complete the following registration form</p>
+
+        <form id="bikeForm">
+            <div class="form-group">
+                <label for="fname">Name:</label>
+                <input type="text" id="fname" name="fname">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Mailing Address:</label>
+                <input type="email" id="email" name="email" size="40">
+            </div>
+
+            <div class="form-group">
+                <label>What is overall opinion of this website?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="opinion" value="high"> High</label><br>
+                    <label><input type="radio" name="opinion" value="average"> Average</label><br>
+                    <label><input type="radio" name="opinion" value="low"> Low</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Additional Comments</label>
+                <textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="source">How did you learn about this website?</label>
+                <select id="source" name="source">
+                    <option value="">Select...</option>
+                    <option value="word">Word of mouth</option>
+                    <option value="search">Search Engine</option>
+                    <option value="social">Social Media</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <p class="validate-msg">Please validate before submitting your registration!</p>
+
+            <div class="btn-group">
+                <button type="button" onclick="resetForm()">Reset Form</button>
+                <button type="button" onclick="submitForm()">Submit Form</button>
+                <button type="button" onclick="validateOrder()">validate order</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateOrder() {
+            const fname = document.getElementById('fname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const opinion = document.querySelector('input[name="opinion"]:checked');
+            const comments = document.getElementById('comments').value.trim();
+            const source = document.getElementById('source').value;
+
+            // Check each field and show specific alert
+            if (fname === '') {
+                alert('Missing First Name! Please correct');
+                document.getElementById('fname').focus();
+                return false;
+            }
+
+            if (email === '') {
+                alert('Missing Email Address! Please correct');
+                document.getElementById('email').focus();
+                return false;
+            }
+
+            if (!opinion) {
+                alert('Missing Opinion! Please select an option');
+                return false;
+            }
+
+            if (comments === '') {
+                alert('Missing Comments! Please correct');
+                document.getElementById('comments').focus();
+                return false;
+            }
+
+            if (source === '') {
+                alert('Missing Source! Please select how you learned about us');
+                document.getElementById('source').focus();
+                return false;
+            }
+
+            alert('✅ All fields validated successfully!');
+            return true;
+        }
+
+        function submitForm() {
+            if (validateOrder()) {
+                alert('Form submitted successfully!');
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('bikeForm').reset();
+        }
+    </script>
+</body>
+</html>

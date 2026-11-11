@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 Task 4 - External JS & Events</title>
+    <!-- 
+        SCRIPT PLACEMENT IN HEAD:
+        - Scripts here load BEFORE page content
+        - May block rendering if not using async/defer
+        - Good for libraries that need to load first
+        - NOT recommended for DOM manipulation scripts
+        - Can cause "Cannot read property of null" errors if DOM not ready
+    -->
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .event-box { padding: 30px; margin: 20px 0; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .click-box { background: #3498db; color: white; }
+        .click-box:hover { background: #2980b9; transform: scale(1.02); }
+        .hover-box { background: #2ecc71; color: white; }
+        .hover-box:hover { background: #27ae60; transform: scale(1.02); }
+        .dbl-box { background: #e74c3c; color: white; }
+        .dbl-box:hover { background: #c0392b; transform: scale(1.02); }
+        .info-panel { background: #ecf0f1; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .const-demo { background: #9b59b6; color: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .log-box { background: #2c3e50; color: #2ecc71; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; max-height: 200px; overflow-y: auto; }
+        .log-box p { margin: 3px 0; }
+        button { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 5px; transition: all 0.3s; }
+        .btn-print { background: #f39c12; color: white; }
+        .btn-print:hover { background: #e67e22; }
+    </style>
+
+    <!-- HEAD SCRIPT: Demonstrates script placement comparison -->
+    <script>
+        // This script runs immediately when head is parsed
+        // BEFORE the body content loads
+        console.log('HEAD SCRIPT: Loaded at ' + new Date().toLocaleTimeString());
+        console.log('HEAD SCRIPT: document.body is ' + (document.body ? 'available' : 'NOT available yet'));
+        // At this point, document.body is NULL because body hasn't loaded yet!
+        // This is why DOM manipulation scripts should NOT go in head
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Lab 4 Task 4: External JS, Events & Script Placement</h1>
+
+        <div class="info-panel">
+            <h3>📋 Task Requirements</h3>
+            <ul>
+                <li>✅ External JavaScript file with 3+ functions</li>
+                <li>✅ Different events: click, mouseover, dblclick</li>
+                <li>✅ Script placement comparison (head vs body bottom)</li>
+                <li>✅ Constant object demonstration</li>
+                <li>✅ window.print() functionality</li>
+            </ul>
+        </div>
+
+        <!-- Event Demonstration Boxes -->
+        <h3>Event Handlers</h3>
+
+        <div id="click-box" class="event-box click-box">
+            <h2>🖱️ CLICK Event</h2>
+            <p>Click me to see the click event handler!</p>
+            <p id="click-result"></p>
+        </div>
+
+        <div id="hover-box" class="event-box hover-box">
+            <h2>👆 MOUSEOVER/MOUSEOUT Events</h2>
+            <p>Hover over me to see mouseover/mouseout events!</p>
+            <p id="hover-result"></p>
+        </div>
+
+        <div id="dbl-box" class="event-box dbl-box">
+            <h2>👆👆 DOUBLE-CLICK Event</h2>
+            <p>Double-click me to see the dblclick event!</p>
+            <p id="dbl-result"></p>
+        </div>
+
+        <!-- Const Object Demonstration -->
+        <div class="const-demo">
+            <h3>🔒 const Object Demonstration</h3>
+            <p id="const-info">Check console for const object behavior demonstration</p>
+            <button onclick="demonstrateConst()">Test const Object</button>
+            <button onclick="attemptConstModify()">Try to Modify const</button>
+        </div>
+
+        <!-- Print Button -->
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="btn-print" onclick="window.print()">🖨️ Print This Page</button>
+        </div>
+
+        <!-- Log Box -->
+        <div class="log-box" id="log-box">
+            <p>> Page loaded...</p>
+        </div>
+    </div>
+
+    <!-- 
+        SCRIPT PLACEMENT AT BOTTOM OF BODY:
+        - Scripts here load AFTER all HTML content is parsed
+        - DOM is fully available - no null reference errors
+        - Better page loading performance (content shows first)
+        - RECOMMENDED placement for DOM manipulation scripts
+        - Improves display speed as script interpretation doesn't block rendering
+    -->
+    <script>
+        // Log script placement comparison
+        console.log('BODY BOTTOM SCRIPT: Loaded at ' + new Date().toLocaleTimeString());
+        console.log('BODY BOTTOM SCRIPT: document.body is ' + (document.body ? 'AVAILABLE' : 'not available'));
+        // At this point, document.body IS available because all HTML above has loaded
+
+        const logBox = document.getElementById('log-box');
+
+        function log(message) {
+            console.log(message);
+            const p = document.createElement('p');
+            p.textContent = '> ' + message;
+            logBox.appendChild(p);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        log('Body-bottom script executed - DOM fully available');
+        log('Head script would fail here because body was not ready');
+    </script>
+
+    <!-- External JavaScript File -->
+    <script src="task4_external.js"></script>
+</body>
+</html>

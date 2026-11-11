@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 Task 3 - Form Validation</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 30px auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        label { min-width: 120px; font-weight: 600; color: #555; }
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #3498db; }
+        .radio-group { display: flex; gap: 20px; flex: 1; }
+        .checkbox-group { flex: 1; }
+        .error-msg { color: #e74c3c; font-size: 0.9rem; display: none; margin-left: 135px; }
+        .error-msg.show { display: block; }
+        .btn-group { text-align: center; margin-top: 25px; }
+        button { padding: 12px 30px; margin: 0 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-submit { background: #2ecc71; color: white; }
+        .btn-submit:hover { background: #27ae60; }
+        .btn-reset { background: #e74c3c; color: white; }
+        .btn-reset:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up Form (JavaScript Validation)</h1>
+
+        <form id="signupForm" onsubmit="return validateForm(event)">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="error-msg" id="name-error">Please fill Name field</div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male"> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                </div>
+            </div>
+            <div class="error-msg" id="gender-error">Please select Gender</div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="error-msg" id="email-error">Please fill Email field</div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+            <div class="error-msg" id="address-error">Please fill Address field</div>
+
+            <div class="form-group">
+                <label for="loginId">Login ID:</label>
+                <input type="text" id="loginId" name="loginId">
+            </div>
+            <div class="error-msg" id="loginId-error">Please fill Login ID field</div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="error-msg" id="password-error">Please fill Password field</div>
+
+            <div class="form-group">
+                <label>Agreed with Policy:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="policy" name="policy">
+                </div>
+            </div>
+            <div class="error-msg" id="policy-error">Please agree to the policy</div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn-submit">Submit</button>
+                <button type="reset" class="btn-reset" onclick="clearErrors()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            // Clear all previous errors
+            clearErrors();
+
+            // Validate Name
+            const name = document.getElementById('name').value.trim();
+            if (name === '') {
+                document.getElementById('name-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Gender
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('gender-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Email
+            const email = document.getElementById('email').value.trim();
+            if (email === '') {
+                document.getElementById('email-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Address
+            const address = document.getElementById('address').value.trim();
+            if (address === '') {
+                document.getElementById('address-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Login ID
+            const loginId = document.getElementById('loginId').value.trim();
+            if (loginId === '') {
+                document.getElementById('loginId-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Password
+            const password = document.getElementById('password').value;
+            if (password === '') {
+                document.getElementById('password-error').classList.add('show');
+                isValid = false;
+            }
+
+            // Validate Policy Agreement
+            const policy = document.getElementById('policy').checked;
+            if (!policy) {
+                document.getElementById('policy-error').classList.add('show');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('✅ Form submitted successfully!');
+                return true;
+            }
+
+            return false;
+        }
+
+        function clearErrors() {
+            const errors = document.querySelectorAll('.error-msg');
+            errors.forEach(error => error.classList.remove('show'));
+        }
+    </script>
+</body>
+</html>

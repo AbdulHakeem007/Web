@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 Task 2 - Dropdown to Textbox</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #2c3e50; margin-bottom: 30px; }
+        .control-group { display: flex; gap: 15px; justify-content: center; align-items: center; margin: 30px 0; }
+        select { padding: 12px 20px; border: 2px solid #3498db; border-radius: 8px; font-size: 1rem; min-width: 150px; }
+        input[type="text"] { padding: 12px 20px; border: 2px solid #2ecc71; border-radius: 8px; font-size: 1rem; min-width: 150px; }
+        button { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: all 0.3s; }
+        .btn-new { background: #3498db; color: white; }
+        .btn-new:hover { background: #2980b9; transform: translateY(-2px); }
+        .info { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 20px; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Dropdown to Textbox Replacement</h1>
+
+        <div class="control-group" id="control-area">
+            <select id="myDropdown">
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+                <option value="fourth">Fourth</option>
+            </select>
+            <button class="btn-new" id="newEntryBtn" onclick="replaceDropdown()">New Entry</button>
+        </div>
+
+        <div class="info" id="status-msg">
+            Click "New Entry" to replace dropdown with a text input field.
+        </div>
+    </div>
+
+    <script>
+        function replaceDropdown() {
+            const controlArea = document.getElementById('control-area');
+            const dropdown = document.getElementById('myDropdown');
+            const statusMsg = document.getElementById('status-msg');
+
+            // Create new text input element
+            const textInput = document.createElement('input');
+            textInput.type = 'text';
+            textInput.id = 'newTextInput';
+            textInput.placeholder = 'Enter new value...';
+
+            // Replace dropdown with text input
+            controlArea.replaceChild(textInput, dropdown);
+
+            // Update status message
+            statusMsg.innerHTML = '<strong>✓ Success!</strong> Dropdown replaced with textbox. You can now enter custom text.';
+            statusMsg.style.background = '#fff3cd';
+            statusMsg.style.color = '#856404';
+
+            // Focus on new input
+            textInput.focus();
+
+            console.log('Dropdown replaced with text input successfully');
+        }
+    </script>
+</body>
+</html>

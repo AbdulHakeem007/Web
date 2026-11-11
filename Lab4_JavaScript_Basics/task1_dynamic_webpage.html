@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 Task 1 - Dynamic Webpage</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        #demo-heading { color: #e74c3c; transition: all 0.3s; }
+        #demo-paragraph { color: #34495e; line-height: 1.6; padding: 15px; border-left: 4px solid #3498db; background: #ecf0f1; margin: 15px 0; transition: all 0.3s; }
+        #demo-image { border-radius: 10px; transition: all 0.3s; display: block; margin: 15px auto; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        button { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-primary:hover { background: #2980b9; transform: translateY(-2px); }
+        .btn-success { background: #2ecc71; color: white; }
+        .btn-success:hover { background: #27ae60; }
+        .btn-warning { background: #f39c12; color: white; }
+        .btn-warning:hover { background: #e67e22; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-info { background: #9b59b6; color: white; }
+        .btn-info:hover { background: #8e44ad; }
+        .hidden { display: none !important; }
+        .log-box { background: #2c3e50; color: #2ecc71; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9rem; max-height: 200px; overflow-y: auto; margin-top: 20px; }
+        .log-box p { margin: 5px 0; border-bottom: 1px solid #34495e; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lab 4 Task 1: Dynamic Webpage Control</h1>
+
+        <!-- Elements to manipulate -->
+        <h2 id="demo-heading">Original Heading</h2>
+        <p id="demo-paragraph">This is the original paragraph text. It will be manipulated using JavaScript functions.</p>
+        <img id="demo-image" src="https://via.placeholder.com/300x200/3498db/ffffff?text=Original+Image" alt="Demo Image" width="300">
+
+        <hr>
+
+        <!-- Control Buttons -->
+        <h3>Content Controls</h3>
+        <div class="btn-group">
+            <button class="btn-primary" onclick="changeInnerHTML()">Change innerHTML (with formatting)</button>
+            <button class="btn-success" onclick="changeInnerText()">Change innerText (plain text)</button>
+            <button class="btn-warning" onclick="hideElement()">Hide Element</button>
+            <button class="btn-info" onclick="showElement()">Show Element</button>
+        </div>
+
+        <h3>Style Controls</h3>
+        <div class="btn-group">
+            <button class="btn-primary" onclick="increaseFontSize()">Increase Font Size</button>
+            <button class="btn-danger" onclick="decreaseFontSize()">Decrease Font Size</button>
+            <button class="btn-success" onclick="resetAll()">Reset All</button>
+        </div>
+
+        <!-- Console Log Display -->
+        <h3>Action Log (Console Output)</h3>
+        <div class="log-box" id="log-box">
+            <p>> Page loaded. Ready for actions...</p>
+        </div>
+    </div>
+
+    <script>
+        // Using let and const as per modern JavaScript standards
+        const demoHeading = document.getElementById('demo-heading');
+        const demoParagraph = document.getElementById('demo-paragraph');
+        const demoImage = document.getElementById('demo-image');
+        const logBox = document.getElementById('log-box');
+
+        // Track font size
+        let currentFontSize = 16;
+
+        // Helper function to log actions
+        function logAction(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('p');
+            logEntry.textContent = `[${timestamp}] > ${message}`;
+            logBox.appendChild(logEntry);
+            logBox.scrollTop = logBox.scrollHeight;
+
+            // Also log to browser console
+            console.log(message);
+        }
+
+        // Task 1: Change innerHTML with HTML formatting
+        function changeInnerHTML() {
+            demoParagraph.innerHTML = '<b style="color:#e74c3c;">Bold Text</b>, <i style="color:#9b59b6;">Italic Text</i>, and <u style="color:#3498db;">Underlined Text</u> with <mark>highlighted</mark> content!';
+            logAction('innerHTML changed: Added HTML formatting (bold, italic, underline, mark)');
+        }
+
+        // Task 1: Change innerText (plain text only)
+        function changeInnerText() {
+            demoParagraph.innerText = 'This is plain text without any HTML formatting. Even if we try <b>bold</b> tags, they show as text!';
+            logAction('innerText changed: Plain text only, no HTML rendering');
+        }
+
+        // Task 1: Hide element using display property
+        function hideElement() {
+            demoImage.style.display = 'none';
+            logAction('Element hidden: display set to "none"');
+        }
+
+        // Task 1: Show element using display property
+        function showElement() {
+            demoImage.style.display = 'block';
+            logAction('Element shown: display set to "block"');
+        }
+
+        // Task 1: Increase font size dynamically
+        function increaseFontSize() {
+            currentFontSize += 2;
+            demoParagraph.style.fontSize = currentFontSize + 'px';
+            demoHeading.style.fontSize = (currentFontSize + 8) + 'px';
+            logAction(`Font size increased to ${currentFontSize}px`);
+        }
+
+        // Task 1: Decrease font size dynamically
+        function decreaseFontSize() {
+            if (currentFontSize > 10) {
+                currentFontSize -= 2;
+                demoParagraph.style.fontSize = currentFontSize + 'px';
+                demoHeading.style.fontSize = (currentFontSize + 8) + 'px';
+                logAction(`Font size decreased to ${currentFontSize}px`);
+            } else {
+                logAction('Font size at minimum (10px)');
+            }
+        }
+
+        // Reset all changes
+        function resetAll() {
+            demoHeading.innerHTML = 'Original Heading';
+            demoParagraph.innerHTML = 'This is the original paragraph text. It will be manipulated using JavaScript functions.';
+            demoParagraph.style.fontSize = '16px';
+            demoHeading.style.fontSize = '24px';
+            demoImage.style.display = 'block';
+            currentFontSize = 16;
+            logAction('All elements reset to original state');
+        }
+
+        // Initial log
+        logAction('All variables declared using const and let');
+        logAction('DOM elements accessed and stored in constants');
+    </script>
+</body>
+</html>

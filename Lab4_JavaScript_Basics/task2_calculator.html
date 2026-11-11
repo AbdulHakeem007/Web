@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 Task 2 - Interactive Calculator</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input[type="number"] { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 1.1rem; transition: border-color 0.3s; }
+        input[type="number"]:focus { outline: none; border-color: #667eea; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
+        button { padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-size: 1.1rem; font-weight: 700; transition: all 0.3s; }
+        .btn-add { background: #2ecc71; color: white; }
+        .btn-add:hover { background: #27ae60; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4); }
+        .btn-mul { background: #3498db; color: white; }
+        .btn-mul:hover { background: #2980b9; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
+        .btn-comp { background: #e74c3c; color: white; grid-column: span 2; }
+        .btn-comp:hover { background: #c0392b; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); }
+        #result-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; font-size: 1.3rem; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .result-value { color: #2c3e50; font-weight: 700; }
+        .error { color: #e74c3c; }
+        .log-box { background: #2c3e50; color: #2ecc71; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem; max-height: 150px; overflow-y: auto; margin-top: 20px; }
+        .log-box p { margin: 3px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Interactive Calculator</h1>
+
+        <div class="input-group">
+            <label for="num1">First Number:</label>
+            <input type="number" id="num1" placeholder="Enter first number" step="any">
+        </div>
+
+        <div class="input-group">
+            <label for="num2">Second Number:</label>
+            <input type="number" id="num2" placeholder="Enter second number" step="any">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-add" onclick="calculate('add')">➕ Addition (+)</button>
+            <button class="btn-mul" onclick="calculate('multiply')">✖️ Multiplication (×)</button>
+            <button class="btn-comp" onclick="calculate('compare')">⚖️ Compare (>, <, =)</button>
+        </div>
+
+        <div id="result-box">
+            <span class="result-value">Enter numbers and click an operation</span>
+        </div>
+
+        <div class="log-box" id="log-box">
+            <p>> Calculator initialized...</p>
+        </div>
+    </div>
+
+    <script>
+        // Using let for variables that change, const for constants
+        const resultBox = document.getElementById('result-box');
+        const logBox = document.getElementById('log-box');
+
+        // Function to log to both console and UI
+        function logAction(message) {
+            console.log(message);
+            const p = document.createElement('p');
+            p.textContent = `> ${message}`;
+            logBox.appendChild(p);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // Main calculation function
+        function calculate(operation) {
+            // Get input values using let (they can change)
+            let num1Input = document.getElementById('num1').value;
+            let num2Input = document.getElementById('num2').value;
+
+            // Validation: Check if inputs are empty
+            if (num1Input === '' || num2Input === '') {
+                alert('⚠️ Error: Both input fields must be filled!');
+                resultBox.innerHTML = '<span class="error">Please fill both number fields</span>';
+                logAction('ERROR: Empty input detected');
+                return;
+            }
+
+            // Convert to numbers
+            let num1 = parseFloat(num1Input);
+            let num2 = parseFloat(num2Input);
+
+            // Validation: Check if inputs are valid numbers
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('⚠️ Error: Please enter valid numeric values!');
+                resultBox.innerHTML = '<span class="error">Invalid numeric input</span>';
+                logAction('ERROR: Invalid number format');
+                return;
+            }
+
+            let result;
+            let operator;
+
+            // Perform operation based on parameter
+            switch(operation) {
+                case 'add':
+                    // Addition operator: +
+                    result = num1 + num2;
+                    operator = '+';
+                    logAction(`ADDITION: ${num1} + ${num2} = ${result}`);
+                    break;
+
+                case 'multiply':
+                    // Multiplication operator: *
+                    result = num1 * num2;
+                    operator = '×';
+                    logAction(`MULTIPLICATION: ${num1} × ${num2} = ${result}`);
+                    break;
+
+                case 'compare':
+                    // Comparison operators: >, <, ===
+                    let comparison;
+                    if (num1 > num2) {
+                        comparison = '>';
+                        result = `${num1} is greater than ${num2}`;
+                    } else if (num1 < num2) {
+                        comparison = '<';
+                        result = `${num1} is less than ${num2}`;
+                    } else {
+                        comparison = '=';
+                        result = `${num1} is equal to ${num2}`;
+                    }
+                    logAction(`COMPARISON: ${num1} ${comparison} ${num2}`);
+                    resultBox.innerHTML = `<span class="result-value">${result}</span>`;
+                    return; // Comparison returns text, not number
+
+                default:
+                    logAction('ERROR: Unknown operation');
+                    return;
+            }
+
+            // Display result in HTML element (NOT using document.write())
+            resultBox.innerHTML = `<span class="result-value">${num1} ${operator} ${num2} = <strong>${result}</strong></span>`;
+
+            logAction(`Result displayed: ${result}`);
+        }
+
+        // Initial log
+        logAction('Calculator ready. Using let/const declarations.');
+        logAction('Operators: + (addition), * (multiplication), > < === (comparison)');
+    </script>
+</body>
+</html>

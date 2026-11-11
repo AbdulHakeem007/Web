@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 Task 1 - Addition with NaN</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; font-size: 1.1rem; }
+        input[type="text"] { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 1.1rem; transition: all 0.3s; }
+        input[type="text"]:focus { outline: none; border-color: #667eea; box-shadow: 0 0 10px rgba(102, 126, 234, 0.3); }
+        .result-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center; }
+        .result-box input { background: #e8f5e9; font-weight: bold; color: #2e7d32; }
+        .nan-display { color: #e74c3c; font-weight: bold; }
+        .info { background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>➕ Addition with Event Handling</h1>
+
+        <div class="info">
+            <strong>Task:</strong> When user inputs in first textbox, result shows NaN. 
+            After input in second textbox, addition result displays automatically.
+        </div>
+
+        <div class="form-group">
+            <label for="num1">Enter First Number:</label>
+            <input type="text" id="num1" placeholder="Enter first integer">
+        </div>
+
+        <div class="form-group">
+            <label for="num2">Enter Second Number:</label>
+            <input type="text" id="num2" placeholder="Enter second integer">
+        </div>
+
+        <div class="result-box">
+            <label for="result">Result:</label>
+            <input type="text" id="result" readonly placeholder="Result will appear here">
+        </div>
+    </div>
+
+    <script>
+        // Get elements
+        const num1Input = document.getElementById('num1');
+        const num2Input = document.getElementById('num2');
+        const resultInput = document.getElementById('result');
+
+        // Function to calculate addition
+        function calculateAddition() {
+            const val1 = num1Input.value;
+            const val2 = num2Input.value;
+
+            // If first number is entered but second is empty, show NaN
+            if (val1 !== '' && val2 === '') {
+                resultInput.value = 'NaN';
+                resultInput.classList.add('nan-display');
+                return;
+            }
+
+            // If both are empty, clear result
+            if (val1 === '' && val2 === '') {
+                resultInput.value = '';
+                resultInput.classList.remove('nan-display');
+                return;
+            }
+
+            // Parse integers
+            const n1 = parseInt(val1);
+            const n2 = parseInt(val2);
+
+            // Check if valid numbers
+            if (isNaN(n1) || isNaN(n2)) {
+                resultInput.value = 'NaN';
+                resultInput.classList.add('nan-display');
+                return;
+            }
+
+            // Calculate and display result
+            const sum = n1 + n2;
+            resultInput.value = sum;
+            resultInput.classList.remove('nan-display');
+        }
+
+        // Event listeners for input events
+        // 'input' event fires immediately when user types
+        num1Input.addEventListener('input', calculateAddition);
+        num2Input.addEventListener('input', calculateAddition);
+
+        // Also handle blur events for when user leaves the field
+        num1Input.addEventListener('blur', calculateAddition);
+        num2Input.addEventListener('blur', calculateAddition);
+
+        console.log('Event listeners attached: input and blur on both textboxes');
+    </script>
+</body>
+</html>

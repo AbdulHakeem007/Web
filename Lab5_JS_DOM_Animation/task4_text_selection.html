@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 Task 4 - Text Selection Display</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .input-group { margin: 25px 0; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: #555; }
+        input[type="text"] { width: 100%; padding: 15px; border: 2px solid #3498db; border-radius: 8px; font-size: 1.1rem; }
+        .display-area { background: #00ffff; padding: 30px; border-radius: 10px; margin-top: 20px; min-height: 200px; font-size: 1.5rem; color: #000; word-wrap: break-word; }
+        .info { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Display of selected Text using onSelect Event</h1>
+
+        <div class="info">
+            Enter text below, then select some or all of it to see it displayed in the cyan box.
+        </div>
+
+        <div class="input-group">
+            <label for="selectText">Select Text:</label>
+            <input type="text" id="selectText" placeholder="Type something and select it..." onselect="displaySelected()">
+        </div>
+
+        <div class="display-area" id="displayArea">
+            Selected text will appear here...
+        </div>
+    </div>
+
+    <script>
+        function displaySelected() {
+            const inputField = document.getElementById('selectText');
+            const displayArea = document.getElementById('displayArea');
+
+            // Get selected text using selection methods
+            const start = inputField.selectionStart;
+            const end = inputField.selectionEnd;
+            const selectedText = inputField.value.substring(start, end);
+
+            if (selectedText) {
+                displayArea.textContent = selectedText;
+                console.log('Selected text: ' + selectedText);
+            }
+        }
+
+        // Also handle mouseup for more reliable selection detection
+        document.getElementById('selectText').addEventListener('mouseup', displaySelected);
+        document.getElementById('selectText').addEventListener('keyup', displaySelected);
+    </script>
+</body>
+</html>
